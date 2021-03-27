@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BabyBuddy</string>
+    <string name="scanner_ready">Scanner Ready!</string>
 </resources>
