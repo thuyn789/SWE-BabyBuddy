@@ -2,7 +2,11 @@ package com.example.babybuddy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +20,10 @@ import com.google.zxing.Result;
 public class MainActivity extends AppCompatActivity {
 
     private CodeScanner mCodeScanner;
+    private static final int CAMERA_REQUEST_CODE = 100;
+    private String qrcode;
+    private String username;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void codeScanner() {
+        //Check camera permission
+        setupPermission();
+
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
 
@@ -36,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        qrcode = result.getText();
+                        Toast.makeText(MainActivity.this, qrcode, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -55,13 +67,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Camera begin scanning
+        //Tap on scanner view to preview before camera begin scanning
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCodeScanner.startPreview();
             }
         });
+    }
+
+    //Check and ask user for permisson to use camera
+    private void setupPermission(){
+        String[] permissions = {Manifest.permission.CAMERA};
+
+        if(ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) == PackageManager.PERMISSION_GRANTED){
+            return;
+        }else{
+            ActivityCompat.requestPermissions(this, permissions, CAMERA_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        setupPermission();
     }
 
     @Override
