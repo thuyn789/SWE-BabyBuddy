@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPageActivity"
+    tools:context=".Scanner"
     tools:overrideLibrary="com.budiyev.android.codescanner"
     android:orientation="vertical">
 
@@ -24,7 +24,7 @@
         app:frameAspectRatioHeight="1"
         app:frameSize="0.75"
         app:frameThickness="2dp"
-        app:maskColor="#77000000"/>
+        app:maskColor="#562B2A2A"/>
 
     <LinearLayout
         android:layout_width="match_parent"
