@@ -11,6 +11,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
     private TextView scanner_in;
     private TextView scanner_out;
+    private TextView timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         scanner_out = (TextView) findViewById(R.id.checkout_btn);
         scanner_out.setOnClickListener(this);
+
+        timer = (TextView) findViewById(R.id.settime_btn);
+        timer.setOnClickListener(this);
     }
 
     @Override
@@ -32,6 +36,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.checkout_btn:
                 startActivity(new Intent(this, Scanner.class));
+                break;
+            case R.id.settime_btn:
+                startActivity(new Intent(this, SetTimer.class));
                 break;
         }
     }
