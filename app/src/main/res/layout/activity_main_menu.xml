@@ -38,7 +38,7 @@
         android:id="@+id/checkin_btn"
         android:layout_width="380dp"
         android:layout_height="60dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
         android:text="Check In"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -73,5 +73,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkout_btn"
+        />
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:text="Logout"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settime_btn"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
