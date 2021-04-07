@@ -29,7 +29,7 @@ public class User {
     public String getQrcode() {
         return qrcode;
     }
-    
+
     //The QR Code is not meant to be initialized by the constructor but by this method
     public void setQrcode(String qrcode){
         this.qrcode = qrcode;
