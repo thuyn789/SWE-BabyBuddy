@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String qrcode;
 
     private TextView sign_up;
-    private TextView scanner;
+    private TextView main_menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sign_up = (TextView) findViewById(R.id.sign_up);
         sign_up.setOnClickListener(this);
 
-        scanner = (TextView) findViewById(R.id.login_btn);
-        scanner.setOnClickListener(this);
+        main_menu = (TextView) findViewById(R.id.login_btn);
+        main_menu.setOnClickListener(this);
 
         getPermissions();
     }
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, SignUp.class));
                 break;
             case R.id.login_btn:
-                startActivity(new Intent(this, Scanner.class));
+                startActivity(new Intent(this, MainMenu.class));
                 break;
         }
     }
