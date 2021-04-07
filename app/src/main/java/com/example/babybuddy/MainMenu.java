@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
     private Button scanner_in, scanner_out, timer, logout;
@@ -43,8 +45,15 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
                 startActivity(new Intent(MainMenu.this, SetTimer.class));
                 break;
             case R.id.logout_btn:
-                startActivity(new Intent(MainMenu.this, MainActivity.class));
+                user_logout();
                 break;
         }
+    }
+
+    private void user_logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MainMenu.this, MainActivity.class));
+        finish();
+        return;
     }
 }

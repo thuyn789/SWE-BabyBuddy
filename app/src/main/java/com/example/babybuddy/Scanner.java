@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,17 +19,23 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ErrorCallback;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.Result;
 
-public class Scanner extends AppCompatActivity {
+public class Scanner extends AppCompatActivity implements View.OnClickListener {
 
     private CodeScanner mCodeScanner;
     private String qrcode;
+
+    private Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
+
+        logout = (Button) findViewById(R.id.logout_btn);
+        logout.setOnClickListener(this);
         
         codeScanner();
     }
@@ -84,5 +91,21 @@ public class Scanner extends AppCompatActivity {
     protected void onPause() {
         mCodeScanner.releaseResources();
         super.onPause();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.logout_btn:
+                user_logout();
+                break;
+        }
+    }
+
+    private void user_logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(Scanner.this, MainActivity.class));
+        finish();
+        return;
     }
 }
