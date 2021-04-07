@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "961549819787",
+    "firebase_url": "https://swebabybuddy-default-rtdb.firebaseio.com",
+    "project_id": "swebabybuddy",
+    "storage_bucket": "swebabybuddy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961549819787:android:6fcef9e25c63386479998e",
+        "android_client_info": {
+          "package_name": "com.example.babybuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961549819787-0j1ktvbsfe4s325lnhf6iupks55l1r1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrV8n20dTOdzs35_hxv94az52McU7XM3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961549819787-0j1ktvbsfe4s325lnhf6iupks55l1r1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961549819787:android:8e407f3619cbceff79998e",
+        "android_client_info": {
+          "package_name": "com.example.messengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961549819787-0j1ktvbsfe4s325lnhf6iupks55l1r1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrV8n20dTOdzs35_hxv94az52McU7XM3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961549819787-0j1ktvbsfe4s325lnhf6iupks55l1r1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
