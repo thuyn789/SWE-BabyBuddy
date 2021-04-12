@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
-    private Button scanner_in, scanner_out, timer, logout;
+    private Button scanner_in, scanner_out, timer, logout, ec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +29,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         logout = (Button) findViewById(R.id.logout_btn);
         logout.setOnClickListener(this);
+
+        ec = (Button) findViewById(R.id.EC_btn);
+        ec.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +45,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.settime_btn:
                 startActivity(new Intent(MainMenu.this, SetTimer.class));
+                break;
+            case R.id.EC_btn:
+                startActivity(new Intent(MainMenu.this, EmergencyContactInfo.class));
                 break;
             case R.id.logout_btn:
                 user_logout();

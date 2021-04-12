@@ -1,4 +1,5 @@
 plugins {
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
     id 'com.android.application'
     id 'com.google.gms.google-services'
 }
@@ -54,4 +55,7 @@ dependencies {
 
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     //Credits: https://github.com/yuriy-budiyev/code-scanner
+
+    //OneSignal Dependency
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 }

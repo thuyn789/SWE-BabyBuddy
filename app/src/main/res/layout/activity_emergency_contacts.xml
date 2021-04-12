@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu">
+    tools:context=".EmergencyContactInfo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
             android:id="@+id/banner"
             android:layout_width="match_parent"
@@ -26,10 +25,10 @@
             />
 
         <TextView
-            android:id="@+id/bannerMenu"
+            android:id="@+id/bannerEC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Main Menu"
+            android:text="Emergency Contact"
             android:textSize="28sp"
             android:textAlignment="center"
             android:textStyle="italic"
@@ -38,86 +37,101 @@
             app:layout_constraintRight_toRightOf="parent"
             />
 
-        <Button
-            android:id="@+id/checkin_btn"
+        <EditText
+            android:id="@+id/fname_ec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="200dp"
-            android:text="Check In"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="text"
+            android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bannerMenu"
-            />
-        <Button
-            android:id="@+id/checkout_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Check Out"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkin_btn"
+            app:layout_constraintTop_toBottomOf="@id/bannerEC"
             />
 
-        <Button
-            android:id="@+id/settime_btn"
+        <EditText
+            android:id="@+id/lname_ec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:text="Set Timer"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="text"
+            android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkout_btn"
+            app:layout_constraintTop_toBottomOf="@id/fname_ec"
             />
 
-        <Button
-            android:id="@+id/EC_btn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/emergency"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settime_btn"
-            />
-
-        <Button
-            android:id="@+id/logout_btn"
+        <EditText
+            android:id="@+id/phone_ec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:text="Logout"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="text"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lname_ec"
+            />
+
+        <EditText
+            android:id="@+id/email_ec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_ec"
+            />
+
+        <EditText
+            android:id="@+id/relationship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="@string/relation"
+            android:inputType="text"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email_ec"
+            />
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/submit"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EC_btn"
+            app:layout_constraintTop_toBottomOf="@id/relationship"
             />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

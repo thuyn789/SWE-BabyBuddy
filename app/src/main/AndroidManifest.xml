@@ -20,6 +20,7 @@
         <activity android:name=".SetTimer"></activity>
         <activity android:name=".MainMenu" />
         <activity android:name=".Scanner" />
+        <activity android:name=".EmergencyContactInfo" />
         <activity android:name=".SignUp" />
         <activity android:name=".MainActivity">
             <intent-filter>
