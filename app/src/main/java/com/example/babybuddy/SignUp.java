@@ -1,8 +1,10 @@
 package com.example.babybuddy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -48,6 +50,38 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         password_edittext = (EditText) findViewById(R.id.password);
 
         progress_bar = (ProgressBar) findViewById(R.id.progress_bar);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+
+        alertBuilder.setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
     }
 
     @Override
@@ -137,16 +171,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                             if(task.isSuccessful()){
                                 Toast.makeText(SignUp.this,"Signed Up Successfully", Toast.LENGTH_LONG).show();
                                 progress_bar.setVisibility(View.GONE);
-
+                                finish();
                                 //Take user back to login page;
                                 startActivity(new Intent(SignUp.this, MainActivity.class));
                             }else{
                                 //Failed to sign up new user
                                 Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
                                 progress_bar.setVisibility(View.GONE);
-
-                                //Take user back to login page;
-                                startActivity(new Intent(SignUp.this, MainActivity.class));
                             }
                         }
                     });
@@ -154,6 +185,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                     //Failed to sign up new user
                     Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
                     progress_bar.setVisibility(View.GONE);
+
+                    //Take user back to login page;
+                    startActivity(new Intent(SignUp.this, MainActivity.class));
                 }
             }
         });
