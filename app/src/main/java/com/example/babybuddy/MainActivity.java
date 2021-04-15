@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(MainActivity.this, MainMenu.class));
                 }else{
                     //Failed to sign up new user
-                    Toast.makeText(MainActivity.this,"Login Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Username/Password is incorrect!", Toast.LENGTH_LONG).show();
                     progress_bar.setVisibility(View.GONE);
                 }
             }
