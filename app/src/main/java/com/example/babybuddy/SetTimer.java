@@ -55,25 +55,8 @@ public class SetTimer extends AppCompatActivity {
 
     }//emd onCreate
 
-    private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis % 1000) / 60;
-
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d");
-
-        mTextViewCountDown.setText(timeLeftFormatted);
-    }
-
-    private void resetTimer() {
-        mTimeLeftInMillis = START_TIME_IN_MILLIS;
-        updateCountDownText();
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStartPause.setVisibility(View.VISIBLE);
-    }
-
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000){
-
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
@@ -91,7 +74,7 @@ public class SetTimer extends AppCompatActivity {
         mTimerRunning = true;
         mButtonStartPause.setText("Pause");
         mButtonReset.setVisibility(View.INVISIBLE);
-    }
+    }//startTimer
 
     private void pauseTimer() {
         mCountDownTimer.cancel();
@@ -100,5 +83,19 @@ public class SetTimer extends AppCompatActivity {
         mButtonReset.setVisibility(View.VISIBLE);
     }
 
+    private void resetTimer() {
+        mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        updateCountDownText();
+        mButtonReset.setVisibility(View.INVISIBLE);
+        mButtonStartPause.setVisibility(View.VISIBLE);
+    }
 
+    private void updateCountDownText() {
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        mTextViewCountDown.setText(timeLeftFormatted);
+    }
 }//end class
