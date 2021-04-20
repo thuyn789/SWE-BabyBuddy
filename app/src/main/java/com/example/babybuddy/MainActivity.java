@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void userIsLoggedIn() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            finish();
             startActivity(new Intent(getApplicationContext(), MainMenu.class));
+            finish();
             return;
         }
     }

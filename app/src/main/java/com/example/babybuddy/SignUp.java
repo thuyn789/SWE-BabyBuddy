@@ -1,6 +1,8 @@
 package com.example.babybuddy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -178,6 +180,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                                 //Failed to sign up new user
                                 Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
                                 progress_bar.setVisibility(View.GONE);
+
+                                //Take user back to login page;
+                                startActivity(new Intent(SignUp.this, MainActivity.class));
                             }
                         }
                     });
@@ -188,6 +193,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
                     //Take user back to login page;
                     startActivity(new Intent(SignUp.this, MainActivity.class));
+
                 }
             }
         });

@@ -86,8 +86,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
     private void user_logout() {
         FirebaseAuth.getInstance().signOut();
-        finish();
         startActivity(new Intent(MainMenu.this, MainActivity.class));
+        finish();
         return;
     }
 }
