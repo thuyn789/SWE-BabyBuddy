@@ -13,7 +13,7 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bady Buddy"
+            android:text="@string/App_Name"
             android:textSize="50sp"
             android:textAlignment="center"
             android:textStyle="bold"
@@ -28,7 +28,7 @@
             android:id="@+id/bannerEC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Emergency Contact"
+            android:text="@string/emergency_contact"
             android:textSize="28sp"
             android:textAlignment="center"
             android:textStyle="italic"
@@ -45,13 +45,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="60dp"
             android:ems="10"
-            android:hint="First Name"
+            android:hint="@string/first_name"
             android:inputType="text"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bannerEC"
-            />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/lname_ec"
@@ -61,13 +61,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="Last Name"
+            android:hint="@string/last_name"
             android:inputType="text"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fname_ec"
-            />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/phone_ec"
@@ -77,13 +77,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="Phone Number"
-            android:inputType="text"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lname_ec"
-            />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/email_ec"
@@ -93,13 +93,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="Email Address"
+            android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/phone_ec"
-            />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/relationship"
@@ -115,7 +115,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email_ec"
-            />
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/submit_btn"
