@@ -32,6 +32,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
         logout = (Button) findViewById(R.id.logout_btn);
         logout.setOnClickListener(this);
+
+        ec = (Button) findViewById(R.id.EC_btn);
+        ec.setOnClickListener(this);
     }
 
     @Override
@@ -77,6 +80,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.settime_btn:
                 startActivity(new Intent(MainMenu.this, SetTimer.class));
+                break;
+            case R.id.EC_btn:
+                startActivity(new Intent(MainMenu.this, EmergencyContactInfo.class));
                 break;
             case R.id.logout_btn:
                 user_logout();

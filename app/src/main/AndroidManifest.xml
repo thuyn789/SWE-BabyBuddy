@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BabyBuddy">
         <activity android:name=".SetTimer"></activity>
+        <activity android:name=".EmergencyContactInfo" />
         <activity android:name=".MainMenu" />
         <activity android:name=".Scanner" />
         <activity android:name=".SignUp" />

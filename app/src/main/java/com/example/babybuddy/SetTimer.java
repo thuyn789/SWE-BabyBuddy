@@ -1,7 +1,9 @@
 package com.example.babybuddy;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -54,7 +56,8 @@ public class SetTimer extends AppCompatActivity {
         });
         updateCountDownText();
 
-    }//emd onCreate
+
+    }//end onCreate
 
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000){
