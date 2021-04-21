@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
-    private Button scanner_in, scanner_out, timer, logout;
+    private Button scanner_in, scanner_out, timer, logout, ec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

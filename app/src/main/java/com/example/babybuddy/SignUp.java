@@ -159,7 +159,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    User user = new User(first_name_inmethod, last_name_inmethod, phone_number_inmethod,email_inmethod);
+                    User user = new User(first_name_inmethod, last_name_inmethod, phone_number_inmethod, email_inmethod);
 
                     //Calling Firebase Database object
                     //Adding new "user" object to Firebase database
