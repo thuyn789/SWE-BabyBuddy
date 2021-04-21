@@ -56,6 +56,7 @@ public class SetTimer extends AppCompatActivity {
         });
         updateCountDownText();
 
+
     }//end onCreate
 
     private void startTimer() {
@@ -85,7 +86,6 @@ public class SetTimer extends AppCompatActivity {
         mButtonStartPause.setText("Start");
         mButtonReset.setVisibility(View.VISIBLE);
     }
-
 
     private void resetTimer() {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
