@@ -53,7 +53,7 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         qrcode = result.getText();
-                        Toast.makeText(Scanner.this, qrcode, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Scanner.this, "Scanned Successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -100,6 +100,10 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                 user_logout();
                 break;
         }
+    }
+
+    private void qrCodeHandler(){
+
     }
 
     private void user_logout() {
