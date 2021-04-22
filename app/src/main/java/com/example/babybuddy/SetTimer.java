@@ -24,9 +24,6 @@ public class SetTimer extends AppCompatActivity {
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
-
-public class SetTimer extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
