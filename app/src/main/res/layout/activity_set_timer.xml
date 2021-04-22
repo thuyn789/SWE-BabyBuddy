@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/timer"
         android:layout_centerHorizontal="true"
-        android:text="start" />
+        android:text="start"/>
 
     <Button
         android:id="@+id/button_reset"

@@ -28,7 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.Context.*;
-import static com.example.babybuddy.Notifications.CHANNEL_1_ID;
 
 public class EmergencyContactInfo extends AppCompatActivity implements View.OnClickListener {
 
@@ -135,21 +134,6 @@ public class EmergencyContactInfo extends AppCompatActivity implements View.OnCl
         ContactInfo.push().setValue(EC);
 
 
-    }
-
-    public void sendNotif(View v) {
-        String title = "Baby Buddy";
-        String body = "Emergency Contact Added!";
-
-        Notification notif = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_one)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .build();
-
-        nmc.notify(1, notif);
     }
 
 }
