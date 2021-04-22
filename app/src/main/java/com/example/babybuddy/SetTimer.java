@@ -1,7 +1,10 @@
 package com.example.babybuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -24,6 +27,8 @@ public class SetTimer extends AppCompatActivity {
 
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
+    private NotificationManagerCompat nmc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,8 @@ public class SetTimer extends AppCompatActivity {
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
 
+        nmc = NotificationManagerCompat.from(this);
+
         mButtonStartPause.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -41,6 +48,7 @@ public class SetTimer extends AppCompatActivity {
                     pauseTimer();
                 }else{
                     startTimer();
+                    sendOnNotificationChannel(v);
                 }
             }
         });
@@ -98,4 +106,18 @@ public class SetTimer extends AppCompatActivity {
 
         mTextViewCountDown.setText(timeLeftFormatted);
     }
+
+    public void sendOnNotificationChannel(View v) {
+
+        Notification notif = new NotificationCompat.Builder(this, Notifications.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_one)
+                .setContentTitle("Are you in currently in traffic?")
+                .setContentText("Please answer")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        nmc.notify(1, notif);
+    }
+
 }//end class

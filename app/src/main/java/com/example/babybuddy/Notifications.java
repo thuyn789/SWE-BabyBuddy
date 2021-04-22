@@ -6,7 +6,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 public class Notifications extends Application {
-    public static final String CHANNEL_1_ID = "channel1";
+    public static final String CHANNEL_1_ID = "Timer Notification Channel";
 
     @Override
     public void onCreate() {
@@ -18,7 +18,7 @@ public class Notifications extends Application {
     private void createNotificationChannels(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
-                    CHANNEL_1_ID, "Channel 1", NotificationManager.IMPORTANCE_HIGH);
+                    CHANNEL_1_ID, "Timer Notification Channel", NotificationManager.IMPORTANCE_HIGH);
             channel1.setDescription("This is channel 1");
 
             NotificationManager mNotifManage = getSystemService(NotificationManager.class);
