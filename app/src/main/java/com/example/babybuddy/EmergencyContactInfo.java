@@ -2,7 +2,13 @@ package com.example.babybuddy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -21,11 +27,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static android.content.Context.*;
+
 public class EmergencyContactInfo extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseDatabase DB = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userID = user.getUid();
+    private NotificationManagerCompat nmc;
 
     //Initialize variables
     private Button submit;
@@ -45,6 +54,8 @@ public class EmergencyContactInfo extends AppCompatActivity implements View.OnCl
         phone_edittext = (EditText) findViewById(R.id.phone_ec);
         email_edittext = (EditText) findViewById(R.id.email_ec);
         relation_edittext = (EditText) findViewById(R.id.relationship);
+
+        nmc = NotificationManagerCompat.from(this);
     }
 
     @Override
@@ -115,12 +126,14 @@ public class EmergencyContactInfo extends AppCompatActivity implements View.OnCl
 
         //Declaring path to Current User's Emergency Contact Information
         DatabaseReference ContactInfo = DB.getReference("Users/" + userID
-                + "/Emergency Contact Information: ");
+                + "/Emergency Contact Information: " + "/" + fname_entry);
 
         EmergencyContact EC = new EmergencyContact(fname_entry, lname_entry,
                 phone_entry, email_entry, relation_entry);
 
         ContactInfo.push().setValue(EC);
+
+
     }
 
 }

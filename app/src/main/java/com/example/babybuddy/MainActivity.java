@@ -1,11 +1,13 @@
 package com.example.babybuddy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -98,6 +100,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+
+        alertBuilder.setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.sign_up:
@@ -142,12 +166,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progress_bar.setVisibility(View.GONE);
-
+                    finish();
                     //Take user to main menu page;
                     startActivity(new Intent(MainActivity.this, MainMenu.class));
                 }else{
                     //Failed to sign up new user
-                    Toast.makeText(MainActivity.this,"Login Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Username/Password is incorrect!", Toast.LENGTH_LONG).show();
                     progress_bar.setVisibility(View.GONE);
                 }
             }
