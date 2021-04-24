@@ -10,9 +10,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -113,19 +116,32 @@ public class SetTimer extends AppCompatActivity {
         mTextViewCountDown.setText(timeLeftFormatted);
 
         if(minutes == 9 & seconds == 50 ){
-            Intent myIntent = new Intent(SetTimer.this, MainActivity.class);
+            Intent myIntent = new Intent(this, MainActivity.class);
             myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(SetTimer.this, 0,   myIntent, 0);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,   myIntent, 0);
+
+            Intent broadcast = new Intent(this, NotifReceiver.class);
+            broadcast.putExtra("toastMessage", "testMessage");
+            PendingIntent action = PendingIntent.getBroadcast(this, 0,
+                    broadcast, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_one)
+                    .setSmallIcon(R.drawable.ic_os_notification_fallback_white_24dp)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_one))
+                    .setColor(Color.BLUE)
                     .setContentTitle("Are you currently in traffic?")
-                    .setContentText("Please answer")
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setCategory(Notification.CATEGORY_ALARM)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setAutoCancel(true);
+                    .setAutoCancel(true)
+                    .setOnlyAlertOnce(true)
+                    .addAction(R.mipmap.ic_launcher, "Yes", action);
+
+
+            int notifID = 5678;
             NotificationManagerCompat nM = NotificationManagerCompat.from(this);
-            nM.notify(1, builder.build());
+            nM.notify(notifID, builder.build());
         }
     }
 
@@ -133,7 +149,7 @@ public class SetTimer extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel);
             String description = getString(R.string.description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
