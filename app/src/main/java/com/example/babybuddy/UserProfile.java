@@ -52,6 +52,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         phone_number_edittext = (EditText) findViewById(R.id.phone);
         email_edittext = (EditText) findViewById(R.id.email);
 
+        progress_bar = (ProgressBar) findViewById(R.id.progress_bar);
+
         //Fill out user data to EditText fields
         showUserData();
     }

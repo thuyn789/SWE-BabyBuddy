@@ -13,23 +13,31 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ErrorCallback;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
 public class Scanner extends AppCompatActivity implements View.OnClickListener {
 
+    private DatabaseReference fire_reference;
+    private String userID;
+
     private CodeScanner mCodeScanner;
     private String qrcode;
+    private String fire_qrcode;
 
-    private Button logout;
+    private Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
 
-        logout = (Button) findViewById(R.id.logout_btn);
-        logout.setOnClickListener(this);
+        back = (Button) findViewById(R.id.back_btn);
+        back.setOnClickListener(this);
         
         codeScanner();
     }
@@ -48,6 +56,7 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                     public void run() {
                         qrcode = result.getText();
                         Toast.makeText(Scanner.this, "Scanned Successfully", Toast.LENGTH_SHORT).show();
+                        qrCodeHandler();
                     }
                 });
             }
@@ -90,19 +99,46 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.logout_btn:
-                user_logout();
+            case R.id.back_btn:
+                go_back();
                 break;
         }
     }
 
     private void qrCodeHandler(){
+        fire_reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile = snapshot.getValue(User.class);
 
+                if(userProfile != null){
+                    fire_qrcode = userProfile.qrcode;
+
+                    if(fire_qrcode.compareTo("empty") == 0) {
+                        //Place check in method here
+                        fire_reference.child(userID).child("qrcode").setValue(qrcode);
+                        Toast.makeText(Scanner.this, "Check In Successfully", Toast.LENGTH_LONG).show();
+                    }else if(fire_qrcode.compareTo(qrcode) == 0){
+                        //Place check out method here
+                        fire_reference.child(userID).child("qrcode").setValue("empty");
+                        Toast.makeText(Scanner.this, "Check Out Successfully", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(Scanner.this, "Please Try Again!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Scanner.this, "Failed to retrieve QR Code", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        go_back();
     }
 
-    private void user_logout() {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(Scanner.this, MainActivity.class));
+    private void go_back() {
+        startActivity(new Intent(Scanner.this, MainMenu.class));
         finish();
         return;
     }

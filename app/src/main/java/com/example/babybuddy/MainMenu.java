@@ -98,13 +98,14 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
                 startActivity(new Intent(MainMenu.this, EmergencyContactInfo.class));
                 break;
             case R.id.logout_text:
-                user_logout();
+                onBackPressed();
                 break;
             case R.id.profile_btn:
                 startActivity(new Intent(MainMenu.this, UserProfile.class));
                 break;
         }
     }
+
     private void user_logout() {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MainMenu.this, MainActivity.class));
