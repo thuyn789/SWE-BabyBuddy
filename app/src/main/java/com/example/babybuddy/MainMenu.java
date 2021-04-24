@@ -3,6 +3,9 @@ package com.example.babybuddy;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +17,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener{
 
-    private Button scanner_in, scanner_out, timer, logout, ec;
+    private Button scanner_in, scanner_out, timer, ec, profile;
+
+    private TextView logout_textview;
+    private String text_logout = "Logout";
+    private SpannableString string_logout = new SpannableString(text_logout);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +37,17 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         timer = (Button) findViewById(R.id.settime_btn);
         timer.setOnClickListener(this);
 
-        logout = (Button) findViewById(R.id.logout_btn);
-        logout.setOnClickListener(this);
+        logout_textview = findViewById(R.id.logout_text);
+        logout_textview.setOnClickListener(this);
+        string_logout.setSpan(new UnderlineSpan(), 0, text_logout.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        logout_textview.setText(string_logout);
 
         ec = (Button) findViewById(R.id.EC_btn);
         ec.setOnClickListener(this);
+
+        profile = (Button) findViewById(R.id.profile_btn);
+        profile.setOnClickListener(this);
+
     }
 
     @Override
@@ -84,12 +97,14 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
             case R.id.EC_btn:
                 startActivity(new Intent(MainMenu.this, EmergencyContactInfo.class));
                 break;
-            case R.id.logout_btn:
+            case R.id.logout_text:
                 user_logout();
+                break;
+            case R.id.profile_btn:
+                startActivity(new Intent(MainMenu.this, UserProfile.class));
                 break;
         }
     }
-
     private void user_logout() {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MainMenu.this, MainActivity.class));
