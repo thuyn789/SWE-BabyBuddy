@@ -13,15 +13,18 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ErrorCallback;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 
 public class Scanner extends AppCompatActivity implements View.OnClickListener {
 
+    private FirebaseUser fire_user;
     private DatabaseReference fire_reference;
     private String userID;
 
@@ -35,6 +38,10 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
+
+        fire_user = FirebaseAuth.getInstance().getCurrentUser();
+        fire_reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = fire_user.getUid();
 
         back = (Button) findViewById(R.id.back_btn);
         back.setOnClickListener(this);
@@ -105,6 +112,7 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    //When user change a QR code, this function will check in or check out the baby
     private void qrCodeHandler(){
         fire_reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -112,8 +120,10 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                 User userProfile = snapshot.getValue(User.class);
 
                 if(userProfile != null){
+                    //Retrieve qr code from firebase database
                     fire_qrcode = userProfile.qrcode;
 
+                    //Compare qr code from firebase to the input qr code from scanner
                     if(fire_qrcode.compareTo("empty") == 0) {
                         //Place check in method here
                         fire_reference.child(userID).child("qrcode").setValue(qrcode);
@@ -134,6 +144,7 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
+        finish();
         go_back();
     }
 

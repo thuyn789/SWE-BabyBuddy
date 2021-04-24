@@ -58,6 +58,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         showUserData();
     }
 
+    //This function will retrieve user data from firebase realtime database
     private void showUserData() {
         progress_bar.setVisibility(View.VISIBLE);
         fire_reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,6 +88,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         });
     }
 
+    //If user want to update their information
+    //This function will update user data to firebase realtime database
     private void updateUserData() {
         String first_name_inmethod = first_name_edittext.getText().toString().trim();
         String last_name_inmethod = last_name_edittext.getText().toString().trim();
