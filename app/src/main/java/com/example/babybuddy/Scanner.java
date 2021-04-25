@@ -45,7 +45,7 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
 
         back = (Button) findViewById(R.id.back_btn);
         back.setOnClickListener(this);
-        
+
         codeScanner();
     }
 
@@ -128,10 +128,14 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                         //Place check in method here
                         fire_reference.child(userID).child("qrcode").setValue(qrcode);
                         Toast.makeText(Scanner.this, "Check In Successfully", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(new Intent(Scanner.this, SetTimer.class));
                     }else if(fire_qrcode.compareTo(qrcode) == 0){
                         //Place check out method here
                         fire_reference.child(userID).child("qrcode").setValue("empty");
                         Toast.makeText(Scanner.this, "Check Out Successfully", Toast.LENGTH_LONG).show();
+                        finish();
+                        go_back();
                     }else{
                         Toast.makeText(Scanner.this, "Please Try Again!", Toast.LENGTH_LONG).show();
                     }
