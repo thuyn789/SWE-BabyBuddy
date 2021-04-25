@@ -150,43 +150,43 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
         //Start the process of creating new user with new password
         mAuth.createUserWithEmailAndPassword(email_inmethod,password_inmethod)
-        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    User user = new User(first_name_inmethod, last_name_inmethod, phone_number_inmethod, email_inmethod);
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            User user = new User(first_name_inmethod, last_name_inmethod, phone_number_inmethod, email_inmethod);
 
-                    //Calling Firebase Database object
-                    //Adding new "user" object to Firebase database
-                    //Calling addOnCompleteListener to show the result of the adding object process
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            //Calling Firebase Database object
+                            //Adding new "user" object to Firebase database
+                            //Calling addOnCompleteListener to show the result of the adding object process
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 //addOnCompleteListener will show the result of the process here
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(SignUp.this,"Signed Up Successfully", Toast.LENGTH_LONG).show();
-                                progress_bar.setVisibility(View.GONE);
-                                finish();
-                                //Take user back to login page;
-                                startActivity(new Intent(SignUp.this, MainActivity.class));
-                            }else{
-                                //Failed to sign up new user
-                                Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
-                                progress_bar.setVisibility(View.GONE);
-                            }
-                        }
-                    });
-                }else{
-                    //Failed to sign up new user
-                    Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
-                    progress_bar.setVisibility(View.GONE);
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(SignUp.this,"Signed Up Successfully", Toast.LENGTH_LONG).show();
+                                        progress_bar.setVisibility(View.GONE);
+                                        finish();
+                                        //Take user back to login page;
+                                        startActivity(new Intent(SignUp.this, MainActivity.class));
+                                    }else{
+                                        //Failed to sign up new user
+                                        Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
+                                        progress_bar.setVisibility(View.GONE);
+                                    }
+                                }
+                            });
+                        }else{
+                            //Failed to sign up new user
+                            Toast.makeText(SignUp.this,"Signed Up Failed", Toast.LENGTH_LONG).show();
+                            progress_bar.setVisibility(View.GONE);
 
-                    //Take user back to login page;
-                    startActivity(new Intent(SignUp.this, MainActivity.class));
-                }
-            }
-        });
+                            //Take user back to login page;
+                            startActivity(new Intent(SignUp.this, MainActivity.class));
+                        }
+                    }
+                });
     }
 }

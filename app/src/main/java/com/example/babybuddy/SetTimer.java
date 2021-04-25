@@ -1,7 +1,14 @@
 package com.example.babybuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -9,10 +16,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SetTimer extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 600000;
+    private static final long START_TIME_IN_MILLIS = 60000;
+
+    private final String timer_message = "Timer Expires";
+    private final String traffic_message = "Are you currently in traffic?";
+    private static final String CHANNEL_ID = "Baby Notification Channel";
+    private int notificationCounter = 0;
+    private Timer accTimer;
+
+    private int notificationID = 1;
 
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
@@ -54,8 +71,57 @@ public class SetTimer extends AppCompatActivity {
         });
         updateCountDownText();
 
-
+        accelerometer();
     }//end onCreate
+
+    @Override
+    public void onBackPressed() {
+        accTimer.cancel();
+        super.onBackPressed();
+    }
+
+    private void createAlert(String message){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "App Notification";
+            String description = "Notification for Baby Buddy App";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        //Prepare notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(SetTimer.this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_notification)
+                .setColor(Color.BLUE)
+                .setContentTitle("Baby Buddy Notification")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(Notification.CATEGORY_ALARM)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(SetTimer.this);
+        managerCompat.notify(notificationCounter, builder.build());
+        notificationCounter++;
+    }
+
+    private void accelerometer() {
+        int counter = 3;
+        accTimer = new Timer();
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                createAlert(traffic_message);
+            }
+        };
+        accTimer.schedule(timerTask, 5000, 7000);
+    }
 
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000){
@@ -66,6 +132,7 @@ public class SetTimer extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
+                createAlert(timer_message);
                 mTimerRunning = false;
                 mButtonStartPause.setText("Start");
                 mButtonStartPause.setVisibility(View.INVISIBLE);
