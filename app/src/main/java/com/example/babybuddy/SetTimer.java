@@ -106,18 +106,22 @@ public class SetTimer extends AppCompatActivity {
                 .setOnlyAlertOnce(true);
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(SetTimer.this);
-        managerCompat.notify(notificationCounter, builder.build());
+        managerCompat.notify(notificationID, builder.build());
+        notificationID = notificationCounter;
         notificationCounter++;
     }
 
     private void accelerometer() {
-        int counter = 3;
         accTimer = new Timer();
 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 createAlert(traffic_message);
+                if(notificationCounter > 3){
+                    accTimer.cancel();
+                    return;
+                }
             }
         };
         accTimer.schedule(timerTask, 5000, 7000);
